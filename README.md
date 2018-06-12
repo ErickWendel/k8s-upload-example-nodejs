@@ -18,7 +18,7 @@
 
 ### OR: Alternatives on pulling from Docker hub
 
-- Docker hub image: [erickwendel/nodejs-with-postgres-api-example](https://hub.docker.com/r/erickwendel/nodejs-with-postgres-api-example/)
+- Docker hub image: [erickwendel/k8s-upload-example-nodejs](https://hub.docker.com/r/erickwendel/k8s-upload-example-nodejs)
 
 ```shell
 docker run -d -p 5432:5432 --name postgres \
