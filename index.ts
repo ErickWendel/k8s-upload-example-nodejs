@@ -1,6 +1,7 @@
 import * as Hapi from 'hapi';
 import * as Joi from 'joi';
 import * as Fs from 'fs';
+import { join } from 'path';
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
@@ -25,6 +26,32 @@ server.connection({ port });
 
   server.route([
     {
+      method: 'GET',
+      path: '/{param*}',
+      config: {
+        handler: {
+          directory: {
+            path: 'uploads',
+            redirectToSlash: true,
+            index: true,
+          },
+        },
+      },
+    },
+    {
+      method: 'GET',
+      path: '/',
+      config: {
+        tags: ['api'],
+        description: 'List files',
+        handler: (req, reply) => {
+          Fs.readdir(join(__dirname, 'uploads'), (err, res) =>
+            reply(err || res),
+          );
+        },
+      },
+    },
+    {
       method: 'POST',
       path: '/',
       config: {
@@ -34,7 +61,7 @@ server.connection({ port });
           payload: {
             file: Joi.any()
               .meta({ swaggerType: 'file' })
-              .description('file')
+              .description('file to upload')
               .required(),
           },
         },

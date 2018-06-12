@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Hapi = require("hapi");
 const Joi = require("joi");
 const Fs = require("fs");
+const path_1 = require("path");
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
@@ -25,6 +26,30 @@ server.connection({ port });
     ]);
     server.route([
         {
+            method: 'GET',
+            path: '/{param*}',
+            config: {
+                handler: {
+                    directory: {
+                        path: 'uploads',
+                        redirectToSlash: true,
+                        index: true,
+                    },
+                },
+            },
+        },
+        {
+            method: 'GET',
+            path: '/',
+            config: {
+                tags: ['api'],
+                description: 'List files',
+                handler: (req, reply) => {
+                    Fs.readdir(path_1.join(__dirname, 'uploads'), (err, res) => reply(err || res));
+                },
+            },
+        },
+        {
             method: 'POST',
             path: '/',
             config: {
@@ -34,7 +59,7 @@ server.connection({ port });
                     payload: {
                         file: Joi.any()
                             .meta({ swaggerType: 'file' })
-                            .description('file')
+                            .description('file to upload')
                             .required(),
                     },
                 },
@@ -50,16 +75,16 @@ server.connection({ port });
                 },
                 handler: function (request, reply) {
                     const fileRequest = request.payload.file;
-                    var name = fileRequest.hapi.filename;
-                    var path = __dirname + '/uploads/' + name;
-                    var file = Fs.createWriteStream(path);
+                    const name = fileRequest.hapi.filename;
+                    const path = __dirname + '/uploads/' + name;
+                    const file = Fs.createWriteStream(path);
                     file.on('error', function (err) {
                         console.error(err);
                         return reply('error on upload!' + err);
                     });
                     fileRequest.pipe(file);
                     fileRequest.on('end', function (err) {
-                        var ret = {
+                        const ret = {
                             filename: fileRequest.hapi.filename,
                             headers: fileRequest.hapi.headers,
                         };
