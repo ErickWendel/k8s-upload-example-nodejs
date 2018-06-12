@@ -1,8 +1,8 @@
 ## Node.js with Upload files Example
 
 <img
-    src="https://i.imgur.com/c5sotAg.png"
-    alt="Swagger Page of that application"
+    src="https://i.imgur.com/2YGnZCm.png"
+    alt="Swagger Page of that application listing routes"
     title="Swagger Page of that application" />
 
 ### Requirements

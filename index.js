@@ -27,7 +27,7 @@ server.connection({ port });
     server.route([
         {
             method: 'GET',
-            path: '/{param*}',
+            path: '/uploads/{param*}',
             config: {
                 handler: {
                     directory: {
@@ -40,7 +40,7 @@ server.connection({ port });
         },
         {
             method: 'GET',
-            path: '/',
+            path: '/uploads',
             config: {
                 tags: ['api'],
                 description: 'List files',
@@ -51,7 +51,7 @@ server.connection({ port });
         },
         {
             method: 'POST',
-            path: '/',
+            path: '/uploads',
             config: {
                 tags: ['api'],
                 description: 'Upload a file',

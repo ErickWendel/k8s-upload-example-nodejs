@@ -4,10 +4,6 @@ ADD . src/
 
 WORKDIR /src
 
-RUN npm i -g typescript pm2
-
-RUN npm i 
-
-RUN npm run build 
+RUN npm i -g typescript pm2 && npm i && npm run build 
 
 CMD npm start
