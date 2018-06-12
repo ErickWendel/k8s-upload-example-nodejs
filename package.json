@@ -1,0 +1,23 @@
+{
+  "name": "k8s-nodejs-upload-file-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2-docker index.js",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "erickwendel",
+  "license": "ISC",
+  "dependencies": {
+    "@types/hapi": "15.0.2",
+    "@types/joi": "13.0.8",
+    "hapi": "15.0.2",
+    "hapi-swagger": "7.10.0",
+    "inert": "4.2.1",
+    "joi": "13.1.2",
+    "vision": "4.1.1"
+  }
+}
