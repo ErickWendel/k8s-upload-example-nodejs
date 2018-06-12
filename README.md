@@ -1,4 +1,4 @@
-## Node.js with Postgres Example
+## Node.js with Upload files Example
 
 <img
     src="https://i.imgur.com/c5sotAg.png"
